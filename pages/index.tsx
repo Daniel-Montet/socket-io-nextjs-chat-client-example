@@ -1,8 +1,7 @@
-import ChatLink from "../components/chatLink";
+import Message from "../components/message";
 import socket from "../lib/socketClient";
 
 export default function Home() {
-  let s = socket;
   return (
     <main className="px-40 pt-5 bg-secondary min-h-screen h-screen relative">
       <section className="header grid grid-cols-2">
@@ -41,18 +40,18 @@ export default function Home() {
         <section className="content relative flex flex-row gap-5 mt-4 h-5/6 min-h-5/6">
           <section className="nav bg-white w-2/5 rounded-3xl overflow-y-scroll">
             <span className="p-4">
-              <ChatLink />
-              <ChatLink />
-              <ChatLink />
-              <ChatLink />
-              <ChatLink />
-              <ChatLink />
-              <ChatLink />
-              <ChatLink />
+              <Message />
+              <Message />
+              <Message />
+              <Message />
+              <Message />
+              <Message />
+              <Message />
+              <Message />
             </span>
           </section>
           <section className="chat bg-white w-4/5 rounded-3xl">
-            <div className="pt-6 pl-5 flex flex-col">
+            <div className="pt-6 pl-5 flex flex-col relative">
               <div className="message-in flex gap-4 mb-4">
                 <img
                   src="https://picsum.photos/200/300"
@@ -70,6 +69,18 @@ export default function Home() {
                   I should keep it very very short.
                 </p>
               </div>
+              <form
+                className="textArea"
+                onSubmit={(event) => {
+                  event.preventDefault();
+                }}
+              >
+                <input
+                  type="text"
+                  onChange={(e) => socket.emit("chat message", e.target.value)}
+                />
+                <button type="submit">submit</button>
+              </form>
             </div>
           </section>
         </section>

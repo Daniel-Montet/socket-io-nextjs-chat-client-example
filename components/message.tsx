@@ -1,4 +1,4 @@
-export default function ChatLink() {
+export default function Message() {
   return (
     <div className="user p-4 w-full flex flex-row">
       <div className="w-1/5">
