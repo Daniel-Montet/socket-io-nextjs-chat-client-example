@@ -1,6 +1,10 @@
+import ChatLink from "../components/chatLink";
+import socket from "../lib/socketClient";
+
 export default function Home() {
+  let s = socket;
   return (
-    <main className="px-10 pt-5 bg-secondary min-h-screen h-screen relative">
+    <main className="px-40 pt-5 bg-secondary min-h-screen h-screen relative">
       <section className="header grid grid-cols-2">
         <div className="logo flex">
           <img src="/logo.png" alt="" className="h-10" />
@@ -34,100 +38,40 @@ export default function Home() {
             CLEAR CHAT
           </button>
         </section>
-        <section className="content relative flex flex-row gap-4 mt-4 h-5/6 min-h-5/6">
-          <section className="nav bg-white w-1/4 rounded-2xl pt-3 overflow-y-scroll">
-            <div className="user p-4 w-full flex flex-row">
-              <div className="w-1/5">
+        <section className="content relative flex flex-row gap-5 mt-4 h-5/6 min-h-5/6">
+          <section className="nav bg-white w-2/5 rounded-3xl overflow-y-scroll">
+            <span className="p-4">
+              <ChatLink />
+              <ChatLink />
+              <ChatLink />
+              <ChatLink />
+              <ChatLink />
+              <ChatLink />
+              <ChatLink />
+              <ChatLink />
+            </span>
+          </section>
+          <section className="chat bg-white w-4/5 rounded-3xl">
+            <div className="pt-6 pl-5 flex flex-col">
+              <div className="message-in flex gap-4 mb-4">
                 <img
                   src="https://picsum.photos/200/300"
                   alt=""
                   className="h-12 w-12 rounded-full"
                 />
+                <p className="p-4 max-w-prose w-2/4 bg-secondary rounded-3xl rounded-tl-none">
+                  Hello this is a sample message. I should be a long message but
+                  I should keep it very very short.
+                </p>
               </div>
-              <div className="meta flex flex-row ml-2 pb-3 justify-between w-4/5	border-b">
-                <div className="info">
-                  <h1 className="name text-base">John Doe</h1>
-                  <span className="excerpt text-sm text-slate-500">
-                    Hello hi how are yuh
-                  </span>
-                </div>
-                <span className="stamp text-sm">8:00</span>
-              </div>
-            </div>
-            <div className="user p-4 w-full flex flex-row">
-              <div className="w-1/5">
-                <img
-                  src="https://picsum.photos/200/300"
-                  alt=""
-                  className="h-12 w-12 rounded-full"
-                />
-              </div>
-              <div className="meta flex flex-row ml-2 pb-3 justify-between w-4/5	border-b">
-                <div className="info">
-                  <h1 className="name text-base">John Doe</h1>
-                  <span className="excerpt text-sm text-slate-500">
-                    Hello hi how are yuh
-                  </span>
-                </div>
-                <span className="stamp text-sm">8:00</span>
-              </div>
-            </div>
-            <div className="user p-4 w-full flex flex-row">
-              <div className="w-1/5">
-                <img
-                  src="https://picsum.photos/200/300"
-                  alt=""
-                  className="h-12 w-12 rounded-full"
-                />
-              </div>
-              <div className="meta flex flex-row ml-2 pb-3 justify-between w-4/5	border-b">
-                <div className="info">
-                  <h1 className="name text-base">John Doe</h1>
-                  <span className="excerpt text-sm text-slate-500">
-                    Hello hi how are yuh
-                  </span>
-                </div>
-                <span className="stamp text-sm">8:00</span>
-              </div>
-            </div>
-            <div className="user p-4 w-full flex flex-row">
-              <div className="w-1/5">
-                <img
-                  src="https://picsum.photos/200/300"
-                  alt=""
-                  className="h-12 w-12 rounded-full"
-                />
-              </div>
-              <div className="meta flex flex-row ml-2 pb-3 justify-between w-4/5	border-b">
-                <div className="info">
-                  <h1 className="name text-base">John Doe</h1>
-                  <span className="excerpt text-sm text-slate-500">
-                    Hello hi how are yuh
-                  </span>
-                </div>
-                <span className="stamp text-sm">8:00</span>
-              </div>
-            </div>
-            <div className="user p-4 w-full flex flex-row">
-              <div className="w-1/5">
-                <img
-                  src="https://picsum.photos/200/300"
-                  alt=""
-                  className="h-12 w-12 rounded-full"
-                />
-              </div>
-              <div className="meta flex flex-row ml-2 pb-3 justify-between w-4/5	border-b">
-                <div className="info">
-                  <h1 className="name text-base">John Doe</h1>
-                  <span className="excerpt text-sm text-slate-500">
-                    Hello hi how are yuh
-                  </span>
-                </div>
-                <span className="stamp text-sm">8:00</span>
+              <div className="message-out ml-auto w-2/4 p-2">
+                <p className="p-4 max-w-prose  bg-secondary rounded-3xl rounded-tl-none">
+                  Hello this is a sample message. I should be a long message but
+                  I should keep it very very short.
+                </p>
               </div>
             </div>
           </section>
-          <section className="chat bg-white w-3/4 rounded-xl"></section>
         </section>
       </section>
     </main>
