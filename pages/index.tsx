@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function Home() {
+export default function Home({ register, socket }: any) {
   const [username, setUsername] = useState("");
 
   return (
@@ -9,7 +9,9 @@ export default function Home() {
         className="m-auto"
         onSubmit={(event) => {
           event.preventDefault();
-          console.log(username);
+          register(true);
+          socket.auth = { username };
+          socket.connect();
         }}
       >
         <input
