@@ -1,7 +1,11 @@
 import Message from "../../components/message";
 import socket from "../../lib/socketClient";
 
-export default function MessageBoard() {
+export default function MessageBoard({ activeUsers }: any) {
+  let messages = activeUsers.map((user: any) => {
+    return <Message key={user.userID} user={user} />;
+  });
+
   return (
     <main className="px-40 pt-5 bg-secondary min-h-screen h-screen relative">
       <section className="header grid grid-cols-2">
@@ -39,16 +43,7 @@ export default function MessageBoard() {
         </section>
         <section className="content relative flex flex-row gap-5 mt-4 h-5/6 min-h-5/6">
           <section className="nav bg-white w-2/5 rounded-3xl overflow-y-scroll">
-            <span className="p-4">
-              <Message />
-              <Message />
-              <Message />
-              <Message />
-              <Message />
-              <Message />
-              <Message />
-              <Message />
-            </span>
+            <span className="p-4">{messages}</span>
           </section>
           <section className="chat bg-white w-4/5 rounded-3xl">
             <div className="pt-6 pl-5 flex flex-col relative">

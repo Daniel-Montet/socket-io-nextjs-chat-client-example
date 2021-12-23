@@ -1,4 +1,4 @@
-export default function Message() {
+export default function Message({ user }: any) {
   return (
     <div className="user p-4 w-full flex flex-row">
       <div className="w-1/5">
@@ -10,7 +10,7 @@ export default function Message() {
       </div>
       <div className="meta flex flex-row ml-2 pb-3 justify-between w-4/5	border-b">
         <div className="info">
-          <h1 className="name text-base">John Doe</h1>
+          <h1 className="name text-base">{user.username}</h1>
           <span className="excerpt text-sm text-slate-500">
             Hello hi how are yuh
           </span>
