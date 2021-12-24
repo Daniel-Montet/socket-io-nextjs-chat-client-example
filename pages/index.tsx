@@ -1,5 +1,6 @@
 import Message from "../components/message";
 import socket from "../lib/socketClient";
+import { Scrollbars } from "react-custom-scrollbars";
 
 export default function Home() {
   return (
