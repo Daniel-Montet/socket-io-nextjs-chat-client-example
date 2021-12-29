@@ -1,9 +1,33 @@
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import ChatPanel from "../../components/chatPanel";
 import Message from "../../components/message";
-import socket from "../../lib/socketClient";
+import { user } from "../_app";
 
-export default function MessageBoard({ activeUsers }: any) {
-  let messages = activeUsers.map((user: any) => {
-    return <Message key={user.userID} user={user} />;
+export default function Inbox({
+  activeUsers,
+  socket,
+  selectedUser,
+  setSelectedUser,
+  isRegistered,
+  setActiveUsers,
+}: any) {
+  const router = useRouter();
+  useEffect(() => {
+    //if not logged in reroute to login page
+    if (!isRegistered) {
+      router.push("/");
+    }
+  });
+
+  let messages = activeUsers.map((user: user) => {
+    return (
+      <Message
+        key={user.userID}
+        user={user}
+        setSelectedUser={setSelectedUser}
+      />
+    );
   });
 
   return (
@@ -46,37 +70,13 @@ export default function MessageBoard({ activeUsers }: any) {
             <span className="p-4">{messages}</span>
           </section>
           <section className="chat bg-white w-4/5 rounded-3xl">
-            <div className="pt-6 pl-5 flex flex-col relative">
-              <div className="message-in flex gap-4 mb-4">
-                <img
-                  src="https://picsum.photos/200/300"
-                  alt=""
-                  className="h-12 w-12 rounded-full"
-                />
-                <p className="p-4 max-w-prose w-2/4 bg-secondary rounded-3xl rounded-tl-none">
-                  Hello this is a sample message. I should be a long message but
-                  I should keep it very very short.
-                </p>
-              </div>
-              <div className="message-out ml-auto w-2/4 p-2">
-                <p className="p-4 max-w-prose  bg-secondary rounded-3xl rounded-tl-none">
-                  Hello this is a sample message. I should be a long message but
-                  I should keep it very very short.
-                </p>
-              </div>
-              <form
-                className="textArea"
-                onSubmit={(event) => {
-                  event.preventDefault();
-                }}
-              >
-                <input
-                  type="text"
-                  onChange={(e) => socket.emit("chat message", e.target.value)}
-                />
-                <button type="submit">submit</button>
-              </form>
-            </div>
+            <ChatPanel
+              selectedUser={selectedUser}
+              setSelectedUser={setSelectedUser}
+              socket={socket}
+              activeUsers={activeUsers}
+              setActiveUsers={setActiveUsers}
+            />
           </section>
         </section>
       </section>

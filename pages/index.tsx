@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Home({ register, socket }: any) {
   const [username, setUsername] = useState("");
