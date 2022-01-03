@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { JsxElement } from "typescript";
 
+export interface message {
+  content: string;
+  from: string;
+  to: string;
+  fromSelf: boolean;
+}
 export default function ChatPanel({
   socket,
   selectedUser,
@@ -8,6 +14,9 @@ export default function ChatPanel({
   activeUsers,
   setActiveUsers,
 }: any) {
+  // debugger;
+  console.log(activeUsers);
+  console.log("selected user ", selectedUser);
   const [message, setMessage] = useState("");
   const handleChange = (e: any) => {
     setMessage(e.target.value);
@@ -17,26 +26,9 @@ export default function ChatPanel({
     {
       event.preventDefault();
       socket.emit("private message", {
-        message,
+        content: message,
         to: selectedUser.userID,
       });
-
-      selectedUser.messages.push({
-        message,
-        fromSelf: true,
-      });
-
-      setSelectedUser(selectedUser);
-
-      let result = activeUsers.map((user: any) => {
-        if (selectedUser.userID === user.userID) {
-          return selectedUser;
-        }
-
-        return user;
-      });
-
-      setActiveUsers(result);
     }
   };
 
@@ -60,13 +52,13 @@ export default function ChatPanel({
 function RenderMessages({ messages }: any) {
   return (
     <>
-      {messages.map((message: any) => {
+      {messages.map((message: message) => {
         console.log(message);
         if (message.fromSelf) {
           return (
             <div key="" className="message-in ml-auto w-2/4 p-2">
               <p className="p-4 max-w-prose  bg-secondary rounded-3xl rounded-tl-none">
-                {message.message}
+                {message.content}
               </p>
             </div>
           );
@@ -80,7 +72,7 @@ function RenderMessages({ messages }: any) {
               className="h-12 w-12 rounded-full"
             />
             <p className="p-4 max-w-prose w-2/4 bg-secondary rounded-3xl rounded-tl-none">
-              {message.message}
+              {message.content}
             </p>
           </div>
         );

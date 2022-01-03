@@ -1,6 +1,14 @@
-import { io } from "socket.io-client";
+// import { Socket } from "socket.io-";
+import { io, Socket, } from "socket.io-client";
+import { DefaultEventsMap } from "socket.io/dist/typed-events";
 
-const socket = io('http://localhost:8000', { autoConnect: false });
+interface socket extends Socket<DefaultEventsMap, DefaultEventsMap> {
+	username?: string
+	sessionID?: string
+	userID?: string
+}
+
+const socket: socket = io('http://localhost:8000', { autoConnect: false });
 
 
 

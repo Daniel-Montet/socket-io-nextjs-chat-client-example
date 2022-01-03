@@ -1,7 +1,13 @@
+import { useRouter } from "next/router";
 import { useState } from "react";
 
-export default function Home({ register, socket }: any) {
+export default function Home({ register, socket, isRegistered }: any) {
   const [username, setUsername] = useState("");
+  const router = useRouter();
+  console.log(isRegistered);
+  if (isRegistered) {
+    router.push("/inbox");
+  }
 
   return (
     <main className="flex justify-center content-center h-screen">

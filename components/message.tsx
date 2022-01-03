@@ -46,7 +46,7 @@ export default function Message({ user, setSelectedUser }: any) {
           <span className="h-2/4	relative flex justify-center	items-center">
             <span
               className={`status rounded-full h-1/4 w-1/4 ${
-                user.isConnected ? "bg-green-500" : "bg-gray-500"
+                user.connected ? "bg-green-500" : "bg-gray-500"
               }`}
             ></span>
           </span>

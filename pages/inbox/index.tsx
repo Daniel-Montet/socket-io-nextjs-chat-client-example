@@ -29,7 +29,7 @@ export default function Inbox({
       />
     );
   });
-
+  // debugger;
   return (
     <main className="px-40 pt-5 bg-secondary min-h-screen h-screen relative">
       <section className="header grid grid-cols-2">
