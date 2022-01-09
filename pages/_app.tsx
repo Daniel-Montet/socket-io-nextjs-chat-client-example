@@ -63,19 +63,22 @@ function MyApp({ Component, pageProps }: AppProps) {
     });
 
     socket.on("user connected", (user: user) => {
-      let connectedUser = users.find((usr: user) => {
-        if (usr.userID === user.userID) {
-          user.connected = true;
-          initReactiveProperties(user);
-          return user;
-        }
-      });
+      // let connectedUser = users.find((usr: user) => {
+      //   if (usr.userID === user.userID) {
+      //     // user.connected = true;
+      //     initReactiveProperties(user);
+      //     return user;
+      //   }
+      // });
+      // console.log("connected user", connectedUser);
+      initReactiveProperties(user);
       let result = users.filter((usr) => {
         if (usr.userID !== user.userID) {
           return usr;
         }
       });
-      setUsers([...result, connectedUser!]);
+      console.log("updated list with connected user", user);
+      setUsers([...result, user]);
     });
 
     socket.on("users", (activeUsers) => {

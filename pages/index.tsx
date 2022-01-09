@@ -4,7 +4,7 @@ import { useState } from "react";
 export default function Home({ register, socket, isRegistered }: any) {
   const [username, setUsername] = useState("");
   const router = useRouter();
-  console.log(isRegistered);
+  // console.log(isRegistered);
   if (isRegistered) {
     router.push("/inbox");
   }

@@ -53,10 +53,12 @@ function RenderMessages({ messages }: any) {
   return (
     <>
       {messages.map((message: message) => {
-        console.log(message);
         if (message.fromSelf) {
           return (
-            <div key="" className="message-in ml-auto w-2/4 p-2">
+            <div
+              key={Math.floor(Math.random() * 101)}
+              className="message-in ml-auto w-2/4 p-2"
+            >
               <p className="p-4 max-w-prose  bg-secondary rounded-3xl rounded-tl-none">
                 {message.content}
               </p>
@@ -65,7 +67,10 @@ function RenderMessages({ messages }: any) {
         }
 
         return (
-          <div key="" className="message-in flex gap-4 mb-4">
+          <div
+            key={Math.floor(Math.random() * 101)}
+            className="message-in flex gap-4 mb-4"
+          >
             <img
               src="https://picsum.photos/200/300"
               alt=""
