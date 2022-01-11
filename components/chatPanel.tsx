@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { JsxElement } from "typescript";
+import crypto from "crypto";
 
 export interface message {
   content: string;
@@ -56,7 +57,7 @@ function RenderMessages({ messages }: any) {
         if (message.fromSelf) {
           return (
             <div
-              key={Math.floor(Math.random() * 101)}
+              key={`${crypto.randomBytes(12)}`}
               className="message-in ml-auto w-2/4 p-2"
             >
               <p className="p-4 max-w-prose  bg-secondary rounded-3xl rounded-tl-none">
@@ -68,7 +69,7 @@ function RenderMessages({ messages }: any) {
 
         return (
           <div
-            key={Math.floor(Math.random() * 101)}
+            key={`${crypto.randomBytes(12)}`}
             className="message-in flex gap-4 mb-4"
           >
             <img
