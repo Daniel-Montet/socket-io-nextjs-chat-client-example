@@ -99,7 +99,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       setUsers(result);
     });
 
-    socket.on("private message", ({ content, from, to }) => {
+    socket.on("private message", ({ content, from, to }: any) => {
       const result = users.map((user: user) => {
         const fromSelf = socket.userID === from;
         if (user.userID === (fromSelf ? to : from)) {
