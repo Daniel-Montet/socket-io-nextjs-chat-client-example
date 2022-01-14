@@ -44,7 +44,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       // console.log(event, args);
     });
 
-    socket.on("session", ({ sessionID, userID, username }) => {
+    socket.on("session", ({ sessionID, userID, username }: any) => {
       // debugger;
       // attach session ID to the next reconnection attempts
       socket.auth = { sessionID };
@@ -66,7 +66,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       setUsers([...result, user]);
     });
 
-    socket.on("users", (activeUsers) => {
+    socket.on("users", (activeUsers: user[]) => {
       activeUsers.forEach((user: user) => {
         user.messages!.forEach((message: any) => {
           message.fromSelf = message.from === socket.userID;
@@ -115,6 +115,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         return user;
       });
       setUsers(result);
+      console.log("result after message", result);
     });
 
     socket.on("connect_error", (err: any) => {

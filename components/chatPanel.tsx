@@ -8,13 +8,7 @@ export interface message {
   to: string;
   fromSelf: boolean;
 }
-export default function ChatPanel({
-  socket,
-  selectedUser,
-  setSelectedUser,
-  activeUsers,
-  setActiveUsers,
-}: any) {
+export default function ChatPanel({ socket, selectedUser }: any) {
   const [message, setMessage] = useState("");
   const handleChange = (e: any) => {
     setMessage(e.target.value);

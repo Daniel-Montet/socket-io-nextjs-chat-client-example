@@ -19,7 +19,6 @@ export default function Inbox({
       router.push("/");
     }
   });
-  console.log("Active users ", activeUsers);
 
   let messages = activeUsers.map((user: user) => {
     return (
@@ -27,6 +26,8 @@ export default function Inbox({
         key={user.userID}
         user={user}
         setSelectedUser={setSelectedUser}
+        updateUsers={setActiveUsers}
+        allUsers={activeUsers}
       />
     );
   });
@@ -63,7 +64,7 @@ export default function Inbox({
             />
           </div>
           <button className="bg-white w-1/4 justify-self-end rounded-3xl text-sm">
-            CLEAR CHAT
+            LOG OUT
           </button>
         </section>
         <section className="content relative flex flex-row gap-5 mt-4 h-5/6 min-h-5/6">
