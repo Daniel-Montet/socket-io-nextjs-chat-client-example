@@ -18,14 +18,13 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [isRegistered, register] = useState(false);
   const [users, setUsers] = useState(Array<user>());
   const [selectedUser, setSelectedUser] = useState<user>({});
-
+  console.log("whole app rendered");
   const router = useRouter();
 
   const initReactiveProperties = (user: user) => {
     user.hasNewMessages = false;
     user.image = "https://picsum.photos/200/300";
   };
-  // console.log("active users  ", users);
 
   const handleAuth = () => {
     const sessionID = localStorage.getItem("sessionID");
@@ -42,13 +41,8 @@ function MyApp({ Component, pageProps }: AppProps) {
     handleAuth();
 
     socket.onAny((event, ...args) => {
-      console.log(event, args);
+      // console.log(event, args);
     });
-
-    // socket.on("connect", () => {
-    //   register(true);
-    //   router.push("/inbox");
-    // });
 
     socket.on("session", ({ sessionID, userID, username }) => {
       // debugger;
@@ -63,21 +57,12 @@ function MyApp({ Component, pageProps }: AppProps) {
     });
 
     socket.on("user connected", (user: user) => {
-      // let connectedUser = users.find((usr: user) => {
-      //   if (usr.userID === user.userID) {
-      //     // user.connected = true;
-      //     initReactiveProperties(user);
-      //     return user;
-      //   }
-      // });
-      // console.log("connected user", connectedUser);
       initReactiveProperties(user);
       let result = users.filter((usr) => {
         if (usr.userID !== user.userID) {
           return usr;
         }
       });
-      console.log("updated list with connected user", user);
       setUsers([...result, user]);
     });
 
@@ -86,17 +71,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         user.messages!.forEach((message: any) => {
           message.fromSelf = message.from === socket.userID;
         });
-        // for (let i = 0; i < activeUsers.length; i++) {
-        //   const existingUser = users[i];
-        //   if (existingUser.userID === user.userID) {
-        //     existingUser.connected = user.connected;
-        //     existingUser.messages = user.messages;
-        //     return;
-        //   }
-        // }
+
         user.self = user.userID === socket.userID;
         initReactiveProperties(user);
-        // users.push(user);
       });
 
       // put the current user first, and then sort by username
@@ -137,14 +114,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 
         return user;
       });
-      console.log("message result", result);
       setUsers(result);
     });
 
     socket.on("connect_error", (err: any) => {
       if (err.message === "Invalid username") {
         localStorage.removeItem("sessionID");
-        console.log("Trouble in paradise");
         register(false);
       }
     });

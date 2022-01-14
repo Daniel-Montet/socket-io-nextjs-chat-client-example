@@ -15,9 +15,6 @@ export default function ChatPanel({
   activeUsers,
   setActiveUsers,
 }: any) {
-  // debugger;
-  console.log(activeUsers);
-  console.log("selected user ", selectedUser);
   const [message, setMessage] = useState("");
   const handleChange = (e: any) => {
     setMessage(e.target.value);
