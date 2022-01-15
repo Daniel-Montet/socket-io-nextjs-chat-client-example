@@ -30,21 +30,21 @@ export default function Message({
 
   const handleClick = (e: any) => {
     // update hasnewMessages for selected user
-    // user.hasNewMessages = false;
+    user.hasNewMessages = false;
     setSelectedUser(user);
-    // let users = allUsers.map((u: user) => {
-    //   if (u.userID === user.userID) {
-    //     return user;
-    //   }
-    //   return u;
-    // });
-    // updateUsers(users);
-    // console.log("users after click", users);
+    let users = allUsers.map((u: user) => {
+      if (u.userID === user.userID) {
+        return user;
+      }
+      return u;
+    });
+    updateUsers(users);
+    console.log("users after click", users);
   };
 
   return (
     <div
-      className={`message p-4 w-full flex flex-row bg-white`}
+      className={`message p-4 w-full flex flex-row bg-white cursor-pointer`}
       onClick={(e: any) => {
         handleClick(e);
       }}
@@ -54,10 +54,11 @@ export default function Message({
       </div>
       <div className="meta flex flex-row ml-2 pb-3 justify-between w-4/5	border-b">
         <div className="info">
-          <h1 className={`name`}>{user.username}</h1>
-          <span className={`excerpt text-sm text-slate-500`}>
-            Hello hi how are yuh
-          </span>
+          <h1 className={`name`}>
+            {user.username}
+            {`${user.self ? " - (You)" : ""}`}
+          </h1>
+          <span className={`excerpt text-sm text-slate-500`}>{}</span>
         </div>
         <div className="flex flex-col">
           <span className={`stamp text-sm`}>8:00</span>

@@ -100,16 +100,19 @@ function MyApp({ Component, pageProps }: AppProps) {
     });
 
     socket.on("private message", ({ content, from, to }: any) => {
+      const fromSelf = socket.userID === from;
+
+      // figure where the message is from using the session excecution context
       const result = users.map((user: user) => {
-        const fromSelf = socket.userID === from;
         if (user.userID === (fromSelf ? to : from)) {
           user.messages!.push({
             content,
             fromSelf,
           });
-          if (user !== selectedUser) {
-            user.hasNewMessages = true;
-          }
+
+          // if a message is not from the current session,
+          // they have a new message
+          user.hasNewMessages = !fromSelf;
         }
 
         return user;
