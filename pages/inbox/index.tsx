@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import PerfectScrollbar from "react-perfect-scrollbar";
 import ChatPanel from "../../components/chatPanel";
 import Message from "../../components/message";
 import { user } from "../_app";
@@ -33,8 +34,8 @@ export default function Inbox({
   });
 
   return (
-    <main className="px-40 pt-5 bg-secondary min-h-screen h-screen relative">
-      <section className="header grid grid-cols-2">
+    <main className="px-40 pt-5 grid grid-rows-24 bg-secondary max-h-screen min-h-screen h-screen relative">
+      <section className="header grid grid-cols-2 row-start-1 row-end-1">
         <div className="logo flex">
           <img src="/logo.png" alt="" className="h-10" />
           <p className="font-semibold self-center ml-5">ChatAPP</p>
@@ -45,7 +46,7 @@ export default function Inbox({
           className="notify self-center justify-self-end h-5"
         />
       </section>
-      <section className="body h-5/6">
+      <section className="body  row-span-22	">
         <section className="utils grid grid-cols-2 w-full mt-10">
           <div className="search-input bg-white relative rounded-3xl flex w-2/5">
             <span className="w-1/6 flex justify-center pl-3.5">
@@ -60,7 +61,7 @@ export default function Inbox({
               type="text"
               name="search"
               id="search"
-              placeholder="SEARCH"
+              placeholder="SEARCH - NOT IMPLIMENTED YET"
             />
           </div>
           <button className="bg-white w-1/4 justify-self-end rounded-3xl text-sm">
@@ -68,8 +69,10 @@ export default function Inbox({
           </button>
         </section>
         <section className="content relative flex flex-row gap-5 mt-4 h-5/6 min-h-5/6">
-          <section className="nav bg-white w-2/5 rounded-3xl overflow-y-scroll">
-            <span className="p-4">{messages}</span>
+          <section className="nav bg-white w-2/5 rounded-3xl">
+            <PerfectScrollbar>
+              <span className="p-4">{messages}</span>
+            </PerfectScrollbar>
           </section>
           <section className="chat bg-white w-4/5 rounded-3xl">
             <ChatPanel

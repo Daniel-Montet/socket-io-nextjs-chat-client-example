@@ -1,6 +1,7 @@
-import { useState } from "react";
-import { JsxElement } from "typescript";
+import { useState, useRef } from "react";
 import crypto from "crypto";
+import React from "react";
+import PerfectScrollbar from "react-perfect-scrollbar";
 
 export interface message {
   content: string;
@@ -9,34 +10,43 @@ export interface message {
   fromSelf: boolean;
 }
 export default function ChatPanel({ socket, selectedUser }: any) {
-  const [message, setMessage] = useState("");
-  const handleChange = (e: any) => {
-    setMessage(e.target.value);
-  };
+  const replyRef: any = useRef(null);
 
   const handleSubmit = (event: any) => {
     {
       event.preventDefault();
       socket.emit("private message", {
-        content: message,
+        content: replyRef.current.value,
         to: selectedUser.userID,
       });
+      // clear reply form input
+      replyRef.current.value = "";
     }
   };
 
   let chat: JSX.Element = <></>;
+  let reply: JSX.Element = <></>;
 
   if (selectedUser && selectedUser.messages) {
     chat = <RenderMessages messages={selectedUser.messages} />;
+    reply = <RenderReplyForm handleSubmit={handleSubmit} ref={replyRef} />;
+
+    return (
+      <div className="grid grid-rows-6 h-full  w-full">
+        <div className="row-span-5 pt-6 pl-5 flex flex-col">
+          <PerfectScrollbar>{chat}</PerfectScrollbar>
+        </div>
+        <div className="row-span-1">{reply}</div>
+      </div>
+    );
   }
 
   return (
-    <div className="pt-6 pl-5 flex flex-col relative">
-      {chat}
-      <form className="textArea" onSubmit={(event) => handleSubmit(event)}>
-        <input type="text" onChange={(event) => handleChange(event)} />
-        <button type="submit">submit</button>
-      </form>
+    <div className="flex flex-col relative justify-center items-center h-full">
+      <img className="h-2/5" src="/begin-chat.svg" alt="" />
+      <span className="text-gray-800	mt-6">
+        click on a connected user to start messaging
+      </span>
     </div>
   );
 }
@@ -77,3 +87,24 @@ function RenderMessages({ messages }: any) {
     </>
   );
 }
+
+const RenderReplyForm = React.forwardRef(({ handleSubmit }: any, ref: any) => {
+  return (
+    <form
+      className="justify-self-end justify-center inset-x-0 bottom-0 flex flex-row p-5 gap-4"
+      onSubmit={(event) => handleSubmit(event)}
+    >
+      <textarea
+        className="border border-slate-400 focus:outline-blue-600 rounded pt-3 pb-3 pl-6	pr-6 h-full flex-auto w-3/4"
+        placeholder="Message"
+        ref={ref}
+      />
+      <button
+        className="rounded-full text-white bg-blue-600 flex-auto w-1/4"
+        type="submit"
+      >
+        Send
+      </button>
+    </form>
+  );
+});

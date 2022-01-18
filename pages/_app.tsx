@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "react-perfect-scrollbar/dist/css/styles.css";
 import type { AppProps } from "next/app";
 import { useEffect, useState } from "react";
 import socket from "../lib/socketClient";
@@ -57,6 +58,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     });
 
     socket.on("user connected", (user: user) => {
+      console.log("connecting user", user);
       initReactiveProperties(user);
       let result = users.filter((usr) => {
         if (usr.userID !== user.userID) {
