@@ -42,7 +42,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     handleAuth();
 
     socket.onAny((event, ...args) => {
-      // console.log(event, args);
+      console.log(event, args);
     });
 
     socket.on("session", ({ sessionID, userID, username }: any) => {
@@ -58,7 +58,6 @@ function MyApp({ Component, pageProps }: AppProps) {
     });
 
     socket.on("user connected", (user: user) => {
-      console.log("connecting user", user);
       initReactiveProperties(user);
       let result = users.filter((usr) => {
         if (usr.userID !== user.userID) {
@@ -89,9 +88,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       setUsers(result);
     });
 
-    socket.on("user disconnected", (user: user) => {
+    socket.on("user disconnected", (userID: string) => {
       let result = users.map((u: user) => {
-        if (u.userID === user.userID) {
+        if (u.userID === userID) {
           u.connected = false;
           return u;
         }

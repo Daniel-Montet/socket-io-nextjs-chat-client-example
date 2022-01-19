@@ -11,6 +11,7 @@ export default function Inbox({
   selectedUser,
   setSelectedUser,
   isRegistered,
+  register,
   setActiveUsers,
 }: any) {
   const router = useRouter();
@@ -64,7 +65,14 @@ export default function Inbox({
             placeholder="SEARCH - NOT IMPLIMENTED YET"
           />
         </div> */}
-        <button className="bg-white w-1/4 col-start-2 p-4 justify-self-end rounded-3xl text-sm">
+        <button
+          className="bg-white w-1/4 col-start-2 p-4 justify-self-end rounded-3xl text-sm"
+          onClick={(e) => {
+            localStorage.removeItem("sessionID");
+            socket.close();
+            register(false);
+          }}
+        >
           LOG OUT
         </button>
       </section>
