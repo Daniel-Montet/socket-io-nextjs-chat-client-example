@@ -27,6 +27,7 @@ export default function Inbox({
         key={user.userID}
         user={user}
         setSelectedUser={setSelectedUser}
+        selectedUser={selectedUser}
         updateUsers={setActiveUsers}
         allUsers={activeUsers}
       />

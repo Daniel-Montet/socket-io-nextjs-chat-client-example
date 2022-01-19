@@ -6,6 +6,7 @@ export default function Message({
   setSelectedUser,
   allUsers,
   updateUsers,
+  selectedUser,
 }: any) {
   // const primary = {
   //   bgColor: "bg-white",
@@ -43,7 +44,11 @@ export default function Message({
 
   return (
     <div
-      className={`message p-4 w-full flex flex-row bg-white cursor-pointer`}
+      className={`message p-4 w-full flex flex-row cursor-pointer ${
+        user.userID === selectedUser.userID
+          ? "bg-blue-600 rounded-lg text-white font-semibold"
+          : "bg-white"
+      }`}
       onClick={(e: any) => {
         handleClick(e);
       }}
