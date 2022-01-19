@@ -91,7 +91,7 @@ function RenderMessages({ messages }: any) {
 const RenderReplyForm = React.forwardRef(({ handleSubmit }: any, ref: any) => {
   return (
     <form
-      className="justify-self-end justify-center inset-x-0 bottom-0 flex flex-row p-5 gap-4"
+      className="justify-self-end justify-center inset-x-0 bottom-0 flex flex-row px-5 gap-4"
       onSubmit={(event) => handleSubmit(event)}
     >
       <textarea
