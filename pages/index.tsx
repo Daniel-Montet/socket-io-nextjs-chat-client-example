@@ -24,8 +24,8 @@ export default function Home({ register, socket, isRegistered }: any) {
       <div className="max-w-md w-full space-y-8">
         <div>
           <img className="mx-auto h-12 w-auto" src="/logo.png" alt="logo" />
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Sign in using a username of your choice
+          <h2 className="mt-6 text-center text-2xl font-extrabold text-gray-900">
+            Sign in using any username
           </h2>
         </div>
         <form
@@ -59,6 +59,9 @@ export default function Home({ register, socket, isRegistered }: any) {
             </button>
           </div>
         </form>
+        <h3 className="mx-auto">
+          NB: This Site is currently not responsive for all devices
+        </h3>
       </div>
     </div>
   );
