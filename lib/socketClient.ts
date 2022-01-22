@@ -8,7 +8,8 @@ interface socket extends Socket<DefaultEventsMap, DefaultEventsMap> {
 	userID?: string
 }
 
-const socket: socket = io('http://localhost:8000', { autoConnect: false });
+const server_url = process.env.NODE_ENV === "production" ? process.env.SERVER_URL : 'http://localhost:8000';
+const socket: socket = io(server_url!, { autoConnect: false });
 
 
 

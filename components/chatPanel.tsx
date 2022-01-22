@@ -108,3 +108,5 @@ const RenderReplyForm = React.forwardRef(({ handleSubmit }: any, ref: any) => {
     </form>
   );
 });
+
+RenderReplyForm.displayName = "RenderReplyForm";
