@@ -9,6 +9,10 @@ interface socket extends Socket<DefaultEventsMap, DefaultEventsMap> {
 }
 
 const server_url = process.env.NODE_ENV === "production" ? process.env.SERVER_URL : 'http://localhost:8000';
+// const local_url = 'http://localhost:8000'
+console.log(process.env.NODE_ENV)
+console.log(process.env.SERVER_URL)
+console.log(server_url)
 const socket: socket = io(server_url!, { autoConnect: false });
 
 
