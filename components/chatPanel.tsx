@@ -45,7 +45,9 @@ export default function ChatPanel({ socket, selectedUser }: any) {
     <div className="flex flex-col relative justify-center items-center h-full">
       <img className="h-2/5" src="/begin-chat.svg" alt="" />
       <span className="text-gray-800	mt-6">
-        click on a connected user to start messaging
+        open a new window in incognito mode or a new window using a different
+        browser, register another user, click on a connected user to start
+        messaging
       </span>
     </div>
   );
