@@ -1,4 +1,9 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Features
+  - Private Messaging
+  - New Message notification
+  - In Memory session
+  - Send Message to yourself
+  - User Connection status
 
 ## Getting Started
 
@@ -32,7 +37,7 @@ The server repository can be found [here](https://github.com/Daniel-Montet/socke
 
 ## TO DO
 - Make the site responsive
-- Add docker image for this app
+- Dockerize the app
 - Add whatsapp like "user typing" feature
 
 
