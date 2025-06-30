@@ -24,8 +24,8 @@ export default function ChatPanel({ socket, selectedUser }: any) {
     }
   };
 
-  let chat: JSX.Element = <></>;
-  let reply: JSX.Element = <></>;
+  let chat = <></>;
+  let reply = <></>;
 
   if (selectedUser && selectedUser.messages) {
     chat = <RenderMessages messages={selectedUser.messages} />;
